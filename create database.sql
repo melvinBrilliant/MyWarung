@@ -23,7 +23,7 @@ create table Produk (
 
 create table Belanja (
 	BelanjaID int not null identity(1,1),
-	[Status] varchar(50) not null,
+	[Status] varchar(50) not null default 'Menunggu Pembayaran',
 	primary key (BelanjaID)
 )
 
