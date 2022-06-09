@@ -62,4 +62,14 @@ public class KategoriController {
                 ));
     }
 
+    @DeleteMapping("delete")
+    public ResponseEntity<RestResponse<String>> deleteKategori(@RequestParam Integer kategoriID) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(new RestResponse<>(
+                        kategoriService.deleteKategori(kategoriID),
+                        "Berhasil memperbarui kategori",
+                        "202"
+                ));
+    }
+
 }

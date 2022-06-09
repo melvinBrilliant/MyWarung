@@ -10,6 +10,7 @@ public interface IKategoriService {
     Boolean kategoriExistsById(Integer id);
     KategoriHeaderDto findKategoriById(Integer kategoriID);
     KategoriInsertDto insertKategoriBaru(KategoriInsertDto insertKategori);
-    KategoriHeaderDto updateKategori(Integer id, KategoriInsertDto updateKategori);
+    KategoriHeaderDto updateKategori(Integer kategoriID, KategoriInsertDto updateKategori);
+    String deleteKategori(Integer kategoriID);
 
 }

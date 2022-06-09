@@ -10,4 +10,5 @@ public interface IProductService {
     Boolean kategoriByIdExists(Integer id);
     ProdukInsertDto insertProdukBaru(ProdukInsertDto insertProduk);
     ProdukHeaderDto updateProduk(Integer produkID, ProdukInsertDto updateProduk);
+    String deleteProduk(Integer id);
 }

@@ -59,4 +59,22 @@ public class KategoriService implements IKategoriService {
 
         return KategoriHeaderDto.set(kategoriLama);
     }
+
+    @Override
+    public String deleteKategori(Integer kategoriID) {
+        Kategori kategori = kategoriRepository.findById(kategoriID)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Kategori tidak ditemukan"
+                ));
+        try {
+            String message = String.format("Berhasil menghapus kategori %s", kategori.getNamaKategori());
+            kategoriRepository.deleteById(kategoriID);
+            return message;
+        } catch (Exception e) {
+            throw new ResponseStatusException(
+                    HttpStatus.METHOD_NOT_ALLOWED,
+                    "Kategori tidak dapat dihapus karena masih terdapat produk di dalam kategori ini"
+            );
+        }
+    }
 }

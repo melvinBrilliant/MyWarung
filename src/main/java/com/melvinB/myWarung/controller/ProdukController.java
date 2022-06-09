@@ -63,8 +63,18 @@ public class ProdukController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new RestResponse<>(
                         produkService.updateProduk(produkID, updateProduk),
-                        "Berhasil memperbarui kategori",
+                        "Berhasil memperbarui produk",
                         "201"
+                ));
+    }
+
+    @DeleteMapping("delete")
+    public ResponseEntity<RestResponse<String>> deleteProduk(@RequestParam Integer produkID) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body(new RestResponse<>(
+                        produkService.deleteProduk(produkID),
+                        "delete success",
+                        "202"
                 ));
     }
 }

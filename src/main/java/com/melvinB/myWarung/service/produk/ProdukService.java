@@ -60,4 +60,14 @@ public class ProdukService implements IProductService {
 
         return ProdukHeaderDto.set(produkLama);
     }
+
+    @Override
+    public String deleteProduk(Integer produkID) {
+        Produk produk = produkRepository.findById(produkID).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produk dengan ID tersebut tidak ditemukan")
+        );
+        String message = String.format("Produk %s berhasil dihapus", produk.getNamaProduk());
+        produkRepository.deleteById(produkID);
+        return message;
+    }
 }
