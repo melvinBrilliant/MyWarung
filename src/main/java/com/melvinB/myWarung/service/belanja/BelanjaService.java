@@ -1,4 +1,4 @@
-package com.melvinB.myWarung.service;
+package com.melvinB.myWarung.service.belanja;
 
 import com.melvinB.myWarung.dao.BelanjaRepository;
 import com.melvinB.myWarung.dao.DetailBelanjaRepository;

@@ -3,7 +3,7 @@ package com.melvinB.myWarung.controller;
 import com.melvinB.myWarung.dto.RestResponse;
 import com.melvinB.myWarung.dto.belanja.BelanjaHeaderDto;
 import com.melvinB.myWarung.dto.detailBelanja.DetailBelanjaHeaderDto;
-import com.melvinB.myWarung.service.BelanjaService;
+import com.melvinB.myWarung.service.belanja.BelanjaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

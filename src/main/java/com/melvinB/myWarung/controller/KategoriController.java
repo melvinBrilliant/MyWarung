@@ -3,8 +3,7 @@ package com.melvinB.myWarung.controller;
 import com.melvinB.myWarung.dto.RestResponse;
 import com.melvinB.myWarung.dto.kategori.KategoriHeaderDto;
 import com.melvinB.myWarung.dto.kategori.KategoriInsertDto;
-import com.melvinB.myWarung.service.KategoriService;
-import org.hibernate.hql.internal.ast.tree.ResolvableNode;
+import com.melvinB.myWarung.service.kategori.KategoriService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,7 +45,7 @@ public class KategoriController {
                 .body(new RestResponse<>(
                         kategoriService.insertKategoriBaru(kategoriBaru),
                         "Berhasil memasukkan kategori baru",
-                        "200"
+                        "201"
                 ));
     }
 

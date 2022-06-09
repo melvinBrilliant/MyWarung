@@ -2,13 +2,13 @@ package com.melvinB.myWarung.controller;
 
 import com.melvinB.myWarung.dto.RestResponse;
 import com.melvinB.myWarung.dto.produk.ProdukHeaderDto;
-import com.melvinB.myWarung.service.ProdukService;
+import com.melvinB.myWarung.dto.produk.ProdukInsertDto;
+import com.melvinB.myWarung.service.produk.ProdukService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -35,6 +35,23 @@ public class ProdukController {
                             "Berhasil menampilkan semua produk",
                             "200"
                     ));
+        }
+    }
+
+    @PostMapping("insert")
+    public ResponseEntity<RestResponse<ProdukInsertDto>> insertProdukBaru(
+            @RequestBody ProdukInsertDto produkBaru
+    ) {
+        if (produkService.kategoriByIdExists(produkBaru.getKategoriID())) {
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(new RestResponse<>(
+                            produkService.insertProdukBaru(produkBaru),
+                            "Berhasil memasukkan produk baru",
+                            "201"
+                    ));
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Gagal Memasukkan produk baru karena kategori tidak ditemukan");
         }
     }
 }
