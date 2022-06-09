@@ -5,7 +5,9 @@ import com.melvinB.myWarung.dto.kategori.KategoriHeaderDto;
 import com.melvinB.myWarung.dto.kategori.KategoriInsertDto;
 import com.melvinB.myWarung.model.Kategori;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -21,9 +23,40 @@ public class KategoriService implements IKategoriService {
     }
 
     @Override
+    public Boolean kategoriExistsById(Integer kategoriID) {
+        return kategoriRepository.existsById(kategoriID);
+    }
+
+    @Override
+    public KategoriHeaderDto findKategoriById(Integer kategoriID) {
+        Kategori kategori = kategoriRepository.findById(kategoriID)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Kategori tidak ditemukan"));
+        return KategoriHeaderDto.set(kategori);
+    }
+
+    @Override
     public KategoriInsertDto insertKategoriBaru(KategoriInsertDto insertKategori) {
         Kategori kategoriBaru = insertKategori.convert();
         kategoriRepository.save(kategoriBaru);
         return insertKategori;
+    }
+
+    @Override
+    public KategoriHeaderDto updateKategori(Integer id, KategoriInsertDto updateKategori) {
+        Kategori kategoriLama = kategoriRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Kategori dengan ID tersebut tidak ditemukan"
+                ));
+
+        kategoriLama.setNamaKategori(updateKategori.getNamaKategori() == null ?
+                kategoriLama.getNamaKategori() : updateKategori.getNamaKategori());
+        kategoriLama.setDeskripsi(updateKategori.getDeskripsi() == null ?
+                kategoriLama.getDeskripsi() : updateKategori.getDeskripsi());
+        kategoriRepository.save(kategoriLama);
+
+
+        return KategoriHeaderDto.set(kategoriLama);
     }
 }

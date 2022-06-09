@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface IKategoriService {
     List<KategoriHeaderDto> findAllKategori();
+    Boolean kategoriExistsById(Integer id);
+    KategoriHeaderDto findKategoriById(Integer kategoriID);
     KategoriInsertDto insertKategoriBaru(KategoriInsertDto insertKategori);
+    KategoriHeaderDto updateKategori(Integer id, KategoriInsertDto updateKategori);
 
 }

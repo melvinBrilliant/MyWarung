@@ -22,18 +22,18 @@ public class KategoriController {
     public ResponseEntity<RestResponse<List<KategoriHeaderDto>>> findAllKategori() {
         if (kategoriService.findAllKategori().size() == 0) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                .body(new RestResponse<>(
-                        kategoriService.findAllKategori(),
-                        "Belum ada kategori yang dimasukkan ke dalam database",
-                        "204"
-                ));
+                    .body(new RestResponse<>(
+                            kategoriService.findAllKategori(),
+                            "Belum ada kategori yang dimasukkan ke dalam database",
+                            "204"
+                    ));
         } else {
             return ResponseEntity.ok()
-                .body(new RestResponse<>(
-                        kategoriService.findAllKategori(),
-                        "Berhasil menampilkan semua kategori",
-                        "200"
-                ));
+                    .body(new RestResponse<>(
+                            kategoriService.findAllKategori(),
+                            "Berhasil menampilkan semua kategori",
+                            "200"
+                    ));
         }
     }
 
@@ -45,6 +45,19 @@ public class KategoriController {
                 .body(new RestResponse<>(
                         kategoriService.insertKategoriBaru(kategoriBaru),
                         "Berhasil memasukkan kategori baru",
+                        "201"
+                ));
+    }
+
+    @PutMapping("update")
+    public ResponseEntity<RestResponse<KategoriHeaderDto>> updateKategori(
+            @RequestParam Integer kategoriID,
+            @RequestBody KategoriInsertDto updateKategori
+    ) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new RestResponse<>(
+                        kategoriService.updateKategori(kategoriID, updateKategori),
+                        "Berhasil memperbarui kategori",
                         "201"
                 ));
     }
