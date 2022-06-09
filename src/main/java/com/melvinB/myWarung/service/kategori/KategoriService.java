@@ -43,8 +43,8 @@ public class KategoriService implements IKategoriService {
     }
 
     @Override
-    public KategoriHeaderDto updateKategori(Integer id, KategoriInsertDto updateKategori) {
-        Kategori kategoriLama = kategoriRepository.findById(id)
+    public KategoriHeaderDto updateKategori(Integer kategoriID, KategoriInsertDto updateKategori) {
+        Kategori kategoriLama = kategoriRepository.findById(kategoriID)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
                         "Kategori dengan ID tersebut tidak ditemukan"

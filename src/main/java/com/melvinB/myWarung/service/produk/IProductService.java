@@ -9,4 +9,5 @@ public interface IProductService {
     List<ProdukHeaderDto> findAllProduk();
     Boolean kategoriByIdExists(Integer id);
     ProdukInsertDto insertProdukBaru(ProdukInsertDto insertProduk);
+    ProdukHeaderDto updateProduk(Integer produkID, ProdukInsertDto updateProduk);
 }

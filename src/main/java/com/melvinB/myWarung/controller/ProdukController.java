@@ -54,4 +54,17 @@ public class ProdukController {
                     "Gagal Memasukkan produk baru karena kategori tidak ditemukan");
         }
     }
+
+    @PutMapping("update")
+    public ResponseEntity<RestResponse<ProdukHeaderDto>> updateProduk(
+            @RequestParam Integer produkID,
+            @RequestBody ProdukInsertDto updateProduk
+    ) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new RestResponse<>(
+                        produkService.updateProduk(produkID, updateProduk),
+                        "Berhasil memperbarui kategori",
+                        "201"
+                ));
+    }
 }

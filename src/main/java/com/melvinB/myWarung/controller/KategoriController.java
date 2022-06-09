@@ -51,12 +51,12 @@ public class KategoriController {
 
     @PutMapping("update")
     public ResponseEntity<RestResponse<KategoriHeaderDto>> updateKategori(
-            @RequestParam Integer kategoriID,
+            @RequestParam Integer produkID,
             @RequestBody KategoriInsertDto updateKategori
     ) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new RestResponse<>(
-                        kategoriService.updateKategori(kategoriID, updateKategori),
+                        kategoriService.updateKategori(produkID, updateKategori),
                         "Berhasil memperbarui kategori",
                         "201"
                 ));
