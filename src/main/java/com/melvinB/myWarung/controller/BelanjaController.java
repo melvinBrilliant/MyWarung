@@ -2,6 +2,7 @@ package com.melvinB.myWarung.controller;
 
 import com.melvinB.myWarung.dto.RestResponse;
 import com.melvinB.myWarung.dto.belanja.BelanjaHeaderDto;
+import com.melvinB.myWarung.dto.detailBelanja.DetailBelanjaHeaderDto;
 import com.melvinB.myWarung.service.BelanjaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,5 +37,15 @@ public class BelanjaController {
                             "200"
                     ));
         }
+    }
+
+    @GetMapping("detail-all")
+    public ResponseEntity<RestResponse<List<DetailBelanjaHeaderDto>>> findAllDetailBelanja() {
+        return ResponseEntity.ok()
+                .body(new RestResponse<>(
+                        belanjaService.findAllDetailBelanja(),
+                        "Berhasil menampilkan semua detail belanja",
+                        "200"
+                ));
     }
 }
