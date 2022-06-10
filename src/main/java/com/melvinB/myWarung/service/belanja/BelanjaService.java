@@ -19,7 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
-public class BelanjaService {
+public class BelanjaService implements IBelanjaService{
 
     @Autowired
     private BelanjaRepository belanjaRepository;
@@ -30,10 +30,12 @@ public class BelanjaService {
     @Autowired
     private ProdukRepository produkRepository;
 
+    @Override
     public List<BelanjaHeaderDto> findAllBelanja() {
         return BelanjaHeaderDto.toList(belanjaRepository.findAll());
     }
 
+    @Override
     public List<DetailBelanjaHeaderDto> findAllDetailBelanja() {
         if (detailBelanjaRepository.findAll().size() == 0) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT);
@@ -41,6 +43,7 @@ public class BelanjaService {
         return DetailBelanjaHeaderDto.toList(detailBelanjaRepository.findAll());
     }
 
+    @Override
     public List<DetailBelanjaHeaderDto> beliProduk(List<BeliDto> keranjang) {
         InsertBelanjaDto insertBelanjaDto = new InsertBelanjaDto("Menunggu pembayaran / edit transaksi");
         Belanja belanjaBaru = insertBelanjaDto.convert();
@@ -62,6 +65,7 @@ public class BelanjaService {
         return DetailBelanjaHeaderDto.toList(detailBelanjaRepository.getDetailKeranjangById(belanjaId));
     }
 
+    @Override
     public List<DetailBelanjaHeaderDto> konfirmasiBayar(Integer belanjaID) {
         Belanja belanja = belanjaRepository.findById(belanjaID)
                 .orElseThrow(() -> new ResponseStatusException(
@@ -87,6 +91,7 @@ public class BelanjaService {
         return DetailBelanjaHeaderDto.toList(detailBelanjas);
     }
 
+    @Override
     public List<DetailBelanjaHeaderDto> batalkanTransaksi(Integer belanjaID) {
         Belanja belanja = belanjaRepository.findById(belanjaID)
                 .orElseThrow(() -> new ResponseStatusException(
@@ -98,6 +103,7 @@ public class BelanjaService {
         return DetailBelanjaHeaderDto.toList(detailBelanjas);
     }
 
+    @Override
     public List<DetailBelanjaHeaderDto> hapusBarangDalamTransaksi(Integer belanjaID, Integer produkID) {
         Belanja belanja = belanjaRepository.findById(belanjaID)
                 .orElseThrow(() -> new ResponseStatusException(
@@ -109,6 +115,7 @@ public class BelanjaService {
         return DetailBelanjaHeaderDto.toList(detailBelanjas);
     }
 
+    @Override
     public List<DetailBelanjaHeaderDto> tambahBarangDalamTransaksi(Integer belanjaID, BeliDto beliDto) {
         Belanja belanja = belanjaRepository.findById(belanjaID)
                 .orElseThrow(() -> new ResponseStatusException(
