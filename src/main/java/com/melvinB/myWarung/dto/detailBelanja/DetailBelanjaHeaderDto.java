@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 public class DetailBelanjaHeaderDto implements Serializable {
-    private final Integer belanjaIDId;
+//    private final Integer belanjaIDId;
     private final String produkIDNamaProduk;
     private final String belanjaIDStatus;
     private final Integer jumlahBarang;
@@ -18,7 +18,7 @@ public class DetailBelanjaHeaderDto implements Serializable {
 
     public static DetailBelanjaHeaderDto set(DetailBelanja detailBelanja) {
         return new DetailBelanjaHeaderDto(
-                detailBelanja.getBelanjaID().getId(),
+//                detailBelanja.getBelanjaID().getId(),
                 detailBelanja.getProdukID().getNamaProduk(),
                 detailBelanja.getBelanjaID().getStatus(),
                 detailBelanja.getJumlahBarang(),
