@@ -34,4 +34,3 @@ create table DetailBelanja (
 	HargaPerUnit money not null,
 	primary key (BelanjaID, ProdukID),
 )
-
